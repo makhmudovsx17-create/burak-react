@@ -1,23 +1,5 @@
-function countOccurrences(obj: Record<string, unknown>, key: string): number {
-    let count = 0;
-
-    for (const k in obj) {
-        if (k === key) {
-            count++;
-        }
-
-        const value = obj[k];
-        if (typeof value === "object" && value !== null) {
-            count += countOccurrences(value as Record<string, unknown>, key);
-        }
-    }
-
-    return count;
+function findIntersection(arr1: number[], arr2: number[]): number[] {
+    return arr1.filter((item) => arr2.includes(item));
 }
 
-console.log(
-    countOccurrences(
-        { model: "Bugatti", steer: { model: "HANKOOK", size: 30 } },
-        "model",
-    ),
-);
+console.log(findIntersection([1, 2, 3], [3, 2, 0]));
