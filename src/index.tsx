@@ -17,12 +17,12 @@ const root = createRoot(container);
 // GLOBAL INTEGRATIONS: REDUX MUI ROUTER
 root.render(
     <React.StrictMode>
-        /* PARENT REDUX */
+        {/* PARENT REDUX */}
         <Provider store={store}>
-            /* PARENT MUI */
+            {/* PARENT MUI */}
             <ThemeProvider theme={theme}>
                 <CssBaseline></CssBaseline>
-                /* PARENT ROUTER */
+                {/* PARENT ROUTER */}
                 <Router>
                     <App />
                 </Router>
