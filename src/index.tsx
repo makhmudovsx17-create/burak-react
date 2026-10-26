@@ -11,15 +11,18 @@ import { BrowserRouter as Router } from "react-router-dom";
 //@ts-ignore
 import "./css/index.css";
 
-const container = document.getElementById("root");
-if (!container) throw new Error("Root element not found");
+const container = document.getElementById("root")!;
 const root = createRoot(container);
 
+// GLOBAL INTEGRATIONS: REDUX MUI ROUTER
 root.render(
     <React.StrictMode>
+        /* PARENT REDUX */
         <Provider store={store}>
+            /* PARENT MUI */
             <ThemeProvider theme={theme}>
                 <CssBaseline></CssBaseline>
+                /* PARENT ROUTER */
                 <Router>
                     <App />
                 </Router>
