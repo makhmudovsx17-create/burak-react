@@ -26,71 +26,82 @@ export default function PopularDishes() {
 
                     <Stack className="cards-frame">
                         <CssVarsProvider>
-                            {list.map((ele, index) => (
-                                <Card key={index} className="card">
-                                    <CardCover>
-                                        <img
-                                            src={ele.imagePath}
-                                            alt={ele.productName}
-                                        />
-                                    </CardCover>
-                                    <CardCover className="card-cover" />
+                            {list.length !== 0 ? (
+                                list.map((ele, index) => {
+                                    return (
+                                        <Card key={index} className="card">
+                                            <CardCover>
+                                                <img
+                                                    src={ele.imagePath}
+                                                    alt={ele.productName}
+                                                />
+                                            </CardCover>
+                                            <CardCover className="card-cover" />
 
-                                    <CardContent
-                                        sx={{ justifyContent: "flex-end" }}
-                                    >
-                                        <JoyStack
-                                            direction="row"
-                                            justifyContent="space-between"
-                                        >
-                                            <Typography
-                                                level="h2"
-                                                fontSize="lg"
-                                                textColor="#fff"
-                                                mb={1}
-                                            >
-                                                {ele.productName}
-                                            </Typography>
-                                            <Typography
+                                            <CardContent
                                                 sx={{
-                                                    fontWeight: "md",
-                                                    color: "neutral.300",
-                                                    alignItems: "center",
-                                                    display: "flex",
+                                                    justifyContent: "flex-end",
                                                 }}
                                             >
-                                                20
-                                                <VisibilityIcon
-                                                    style={{
-                                                        fontSize: 25,
-                                                        marginLeft: 5,
-                                                    }}
-                                                />
-                                            </Typography>
-                                        </JoyStack>
-                                    </CardContent>
+                                                <JoyStack
+                                                    direction="row"
+                                                    justifyContent="space-between"
+                                                >
+                                                    <Typography
+                                                        level="h2"
+                                                        fontSize="lg"
+                                                        textColor="#fff"
+                                                        mb={1}
+                                                    >
+                                                        {ele.productName}
+                                                    </Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            fontWeight: "md",
+                                                            color: "neutral.300",
+                                                            alignItems:
+                                                                "center",
+                                                            display: "flex",
+                                                        }}
+                                                    >
+                                                        20
+                                                        <VisibilityIcon
+                                                            style={{
+                                                                fontSize: 25,
+                                                                marginLeft: 5,
+                                                            }}
+                                                        />
+                                                    </Typography>
+                                                </JoyStack>
+                                            </CardContent>
 
-                                    <CardOverflow
-                                        sx={{
-                                            display: "flex",
-                                            gap: 1.5,
-                                            py: 1.5,
-                                            px: "var(--Card-padding)",
-                                            borderTop: "1px solid",
-                                            height: "60px",
-                                        }}
-                                    >
-                                        <Typography
-                                            startDecorator={
-                                                <DescriptionOutlinedIcon />
-                                            }
-                                            textColor="neutral.300"
-                                        >
-                                            This is delicious meal
-                                        </Typography>
-                                    </CardOverflow>
-                                </Card>
-                            ))}
+                                            <CardOverflow
+                                                sx={{
+                                                    display: "flex",
+                                                    gap: 1.5,
+                                                    py: 1.5,
+                                                    px: "var(--Card-padding)",
+                                                    borderTop: "1px solid",
+                                                    height: "60px",
+                                                }}
+                                            >
+                                                <Typography
+                                                    startDecorator={
+                                                        <DescriptionOutlinedIcon />
+                                                    }
+                                                    textColor="neutral.300"
+                                                >
+                                                    This is delicious meal
+                                                </Typography>
+                                            </CardOverflow>
+                                        </Card>
+                                    );
+                                })
+                            ) : (
+                                <div className="no-data">
+                                    Popular products are not available!
+                                </div>
+                            )}
                         </CssVarsProvider>
                     </Stack>
                 </Stack>

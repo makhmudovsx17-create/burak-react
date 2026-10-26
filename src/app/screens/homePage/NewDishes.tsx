@@ -4,9 +4,9 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
+import JoyStack from "@mui/joy/Stack";
 import { CssVarsProvider } from "@mui/joy/styles";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import JoyStack from "@mui/joy/Stack";
 import Divider from "../../components/divider";
 
 const newDishes = [
@@ -24,65 +24,71 @@ export default function NewDishes() {
                     <Box className={"category-title"}>Fresh Menu</Box>
                     <Stack className={"cards-frame"}>
                         <CssVarsProvider>
-                            {newDishes.map((ele, index) => {
-                                return (
-                                    <Card
-                                        key={index}
-                                        variant="outlined"
-                                        className={"card"}
-                                    >
-                                        <CardOverflow>
-                                            <div className="product-sale">
-                                                Normal size
-                                            </div>
-                                            <AspectRatio ratio="1">
-                                                <img
-                                                    src={ele.imagePath}
-                                                    alt=""
-                                                />
-                                            </AspectRatio>
-                                        </CardOverflow>
-
-                                        <CardOverflow
-                                            variant="soft"
-                                            className="product-detail"
+                            {newDishes.length !== 0 ? (
+                                newDishes.map((ele, index) => {
+                                    return (
+                                        <Card
+                                            key={index}
+                                            variant="outlined"
+                                            className={"card"}
                                         >
-                                            <JoyStack className="info">
-                                                <JoyStack direction="row">
-                                                    <Typography
-                                                        className={"title"}
-                                                    >
-                                                        {ele.productName}
-                                                    </Typography>
-                                                    <Divider
-                                                        width="2"
-                                                        height="24"
-                                                        bg="#d9d9d9"
+                                            <CardOverflow>
+                                                <div className="product-sale">
+                                                    Normal size
+                                                </div>
+                                                <AspectRatio ratio="1">
+                                                    <img
+                                                        src={ele.imagePath}
+                                                        alt=""
                                                     />
-                                                    <Typography
-                                                        className={"price"}
-                                                    >
-                                                        $12
-                                                    </Typography>
-                                                </JoyStack>
-                                                <JoyStack>
-                                                    <Typography
-                                                        className={"views"}
-                                                    >
-                                                        20
-                                                        <VisibilityIcon
-                                                            style={{
-                                                                fontSize: 20,
-                                                                marginLeft: 5,
-                                                            }}
+                                                </AspectRatio>
+                                            </CardOverflow>
+
+                                            <CardOverflow
+                                                variant="soft"
+                                                className="product-detail"
+                                            >
+                                                <JoyStack className="info">
+                                                    <JoyStack direction="row">
+                                                        <Typography
+                                                            className={"title"}
+                                                        >
+                                                            {ele.productName}
+                                                        </Typography>
+                                                        <Divider
+                                                            width="2"
+                                                            height="24"
+                                                            bg="#d9d9d9"
                                                         />
-                                                    </Typography>
+                                                        <Typography
+                                                            className={"price"}
+                                                        >
+                                                            $12
+                                                        </Typography>
+                                                    </JoyStack>
+                                                    <JoyStack>
+                                                        <Typography
+                                                            className={"views"}
+                                                        >
+                                                            20
+                                                            <VisibilityIcon
+                                                                style={{
+                                                                    fontSize: 20,
+                                                                    marginLeft: 5,
+                                                                }}
+                                                            />
+                                                        </Typography>
+                                                    </JoyStack>
                                                 </JoyStack>
-                                            </JoyStack>
-                                        </CardOverflow>
-                                    </Card>
-                                );
-                            })}
+                                            </CardOverflow>
+                                        </Card>
+                                    );
+                                })
+                            ) : (
+                                <div className="no-data">
+                                    New products are not available!
+                                </div>
+                            )}
                         </CssVarsProvider>
                     </Stack>
                 </Stack>
