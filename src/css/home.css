@@ -228,7 +228,7 @@
 
 .homepage .ads-restaurant-frame {
     width: 100%;
-    height: 693px;
+    height: 698px;
     display: flex;
     overflow: hidden;
     transform: perspective(0px);
@@ -237,9 +237,91 @@
 
 .homepage .ads-restaurant-frame .ads-video {
     width: 100%;
+    object-fit: cover;
     background: #0c0e12;
     display: flex;
     box-shadow: 0px -8px 90px rgb(215 215 255);
     transform: scale(1.5);
     overflow: hidden;
+}
+
+/** ACTIVE USERS **/
+
+.homepage .active-users-frame {
+    width: 100%;
+    height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8ff;
+}
+
+.homepage .active-users-frame .main {
+    margin-top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.homepage .active-users-frame .category-title {
+    display: flex;
+    width: 214px;
+    height: 31.712px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    font-family: "Roboto Serif";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: #343434;
+}
+
+.homepage .active-users-frame .cards-frame {
+    width: 100%;
+    margin-top: 47px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+}
+
+.homepage .active-users-frame .card {
+    --Card-padding: 0px;
+    width: 305px;
+    border-radius: 16px;
+    cursor: pointer;
+    gap: 0;
+}
+
+.homepage .active-users-frame .member-nickname {
+    width: 271px;
+    height: 27px;
+    margin: 0;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.homepage .active-users-frame .no-data {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 34px;
+    color: #e3c08d;
 }
