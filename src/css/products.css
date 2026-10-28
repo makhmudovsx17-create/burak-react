@@ -1,0 +1,315 @@
+/** Products page **/
+.products {
+    background: #f8f8ff;
+    padding-top: 60px;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ----- Title + search ----- */
+.products .avatar-big-box {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.products .top-text {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.products .top-text p {
+    margin: 0;
+    font-family: "Roboto Serif", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: #343434;
+}
+
+.products .single-search {
+    position: absolute;
+    right: 0;
+    flex-direction: row;
+    align-items: center;
+}
+
+.products .single-search-input {
+    width: 190px;
+    height: 28px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 14px 0 0 14px;
+    background: #fff;
+    font-size: 12px;
+    outline: none;
+}
+
+.products .single-button-search {
+    height: 28px;
+    padding: 0 14px;
+    border-radius: 0 14px 14px 0;
+    background: #343434;
+    color: #fff;
+    font-size: 11px;
+    box-shadow: none;
+}
+
+/* ----- Filter buttons (New / Price / Views) ----- */
+.products .dishes-filter-section {
+    width: 100%;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.products .dishes-filter-box {
+    flex-direction: row;
+    gap: 12px;
+}
+
+.products .order {
+    min-width: 64px;
+    height: 26px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+/* ----- Colors for MUI buttons inside this page ----- */
+.products .MuiButton-containedPrimary {
+    background: #343434;
+    color: #fff;
+}
+
+.products .MuiButton-containedSecondary {
+    background: #d7b586;
+    color: #343434;
+}
+
+/* ----- Category + products layout ----- */
+.products .list-category-section {
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.products .product-category {
+    flex-shrink: 0;
+}
+
+.products .category-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.products .category-main button {
+    width: 30px;
+    min-width: 30px;
+    height: 66px;
+    padding: 0;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    box-shadow: none;
+}
+
+.products .product-wrapper {
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 40px;
+}
+
+/* ----- Product card ----- */
+.products .product-card {
+    width: 274px;
+    align-items: center;
+}
+
+.products .product-img {
+    position: relative;
+    width: 274px;
+    height: 274px;
+    border-radius: 40px 40px 12px 12px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.products .product-sale {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background: #ff9800;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.products .shop-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    min-width: 40px;
+    width: 40px;
+    height: 32px;
+    border-radius: 8px;
+    background: #9c27b0;
+}
+
+.products .shop-btn:hover {
+    background: #7b1fa2;
+}
+
+.products .shop-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.products .view-btn {
+    position: absolute;
+    bottom: 14px;
+    min-width: 30px;
+    padding: 0;
+}
+
+/* Name + price (the class product-desc is used twice) */
+.products .product-card .product-desc {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.products .product-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #343434;
+}
+
+.products .product-desc .product-desc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 15px;
+    color: #d7a22a;
+}
+
+.products .product-desc svg {
+    color: #e8a817;
+    font-size: 18px;
+}
+
+.products .no-data {
+    width: 100%;
+    padding: 60px 0;
+    text-align: center;
+    font-size: 20px;
+    color: #343434;
+}
+
+/* ----- Pagination ----- */
+.products .pagination-section {
+    margin: 50px 0 70px;
+    align-items: center;
+}
+
+/* ----- Our Family Brands ----- */
+.products .brands-logo {
+    width: 100%;
+    height: 630px;
+    background: #0d1518;
+}
+
+.products .brands-box {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.products .brands-box .category-title {
+    margin-bottom: 40px;
+    font-family: "Roboto", sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #e3c08d;
+}
+
+.products .brands-list {
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+}
+
+.products .brand-card {
+    width: 239px;
+    height: 329px;
+    border-radius: 16px;
+    box-shadow:
+        0 4px 4px rgba(0, 0, 0, 0.25),
+        0 0 14px rgba(255, 255, 255, 0.25);
+    overflow: hidden;
+}
+
+.products .brand-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ----- Address ----- */
+.products .address {
+    padding: 70px 0 90px;
+}
+
+.products .address-area {
+    align-items: center;
+}
+
+.products .address-area .title {
+    font-family: "Roboto Serif", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: #343434;
+}
+
+.products .address-area iframe {
+    max-width: 100%;
+    border: 0;
+    border-radius: 4px;
+}
+
+.products .shop-btn,
+.products .view-btn {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.products .product-img:hover .shop-btn,
+.products .product-img:hover .view-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+.products .address-area iframe {
+    display: block;
+    margin: 60px auto 0;
+    width: 100%;
+    max-width: 1300px;
+}
+
+/** ChosenProduct **/
