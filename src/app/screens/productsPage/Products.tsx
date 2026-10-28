@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Button, Container, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
@@ -21,6 +22,13 @@ const products = [
 ];
 
 export default function Products() {
+    const history = useHistory();
+
+    /** HANDLERS **/
+    const chosenProductHandler = (id: number) => {
+        history.push(`/products/${id}`);
+    };
+
     return (
         <div className={"products"}>
             <Container>
@@ -112,6 +120,9 @@ export default function Products() {
                                         <Stack
                                             key={index}
                                             className={"product-card"}
+                                            onClick={() =>
+                                                chosenProductHandler(index)
+                                            }
                                         >
                                             <Stack
                                                 className={"product-img"}
@@ -122,7 +133,12 @@ export default function Products() {
                                                 <div className={"product-sale"}>
                                                     Normal size
                                                 </div>
-                                                <Button className={"shop-btn"}>
+                                                <Button
+                                                    className={"shop-btn"}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                    }}
+                                                >
                                                     <img
                                                         src={
                                                             "/icons/shopping-cart.svg"
@@ -136,6 +152,9 @@ export default function Products() {
                                                 <Button
                                                     className={"view-btn"}
                                                     sx={{ right: "36px" }}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                    }}
                                                 >
                                                     <Badge
                                                         badgeContent={20}
