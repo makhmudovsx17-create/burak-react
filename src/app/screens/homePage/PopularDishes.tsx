@@ -10,29 +10,36 @@ import JoyStack from "@mui/joy/Stack";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
-const list = [
-    { productName: "Lavash", imagePath: "/img/lavash.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Kebab", imagePath: "/img/kebab.webp" },
-    { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
-];
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePopularDishes } from "./selector";
+import { Product } from "../../../lib/types/product";
+import { serverApi } from "../../../lib/config";
+
+/** REDUX SLICE & SELECTOR **/
+const popularDishesRetriever = createSelector(
+    retrievePopularDishes,
+    (popularDishes) => ({ popularDishes }),
+);
 
 export default function PopularDishes() {
+    const { popularDishes } = useSelector(popularDishesRetriever);
+
     return (
         <div className="popular-dishes-frame">
             <Container>
                 <Stack className="popular-section">
                     <Box className="category-title">Popular Dishes</Box>
-
                     <Stack className="cards-frame">
                         <CssVarsProvider>
-                            {list.length !== 0 ? (
-                                list.map((ele, index) => {
+                            {popularDishes.length !== 0 ? (
+                                popularDishes.map((ele: Product) => {
+                                    const imagePath = `${serverApi}/${ele.productImages[0]}`;
                                     return (
-                                        <Card key={index} className="card">
+                                        <Card className="card" key={ele._id}>
                                             <CardCover>
                                                 <img
-                                                    src={ele.imagePath}
+                                                    src={imagePath}
                                                     alt={ele.productName}
                                                 />
                                             </CardCover>
@@ -64,7 +71,7 @@ export default function PopularDishes() {
                                                             display: "flex",
                                                         }}
                                                     >
-                                                        20
+                                                        {ele.productViews}
                                                         <VisibilityIcon
                                                             style={{
                                                                 fontSize: 25,
@@ -91,7 +98,7 @@ export default function PopularDishes() {
                                                     }
                                                     textColor="neutral.300"
                                                 >
-                                                    This is delicious meal
+                                                    {ele.productDesc}
                                                 </Typography>
                                             </CardOverflow>
                                         </Card>
