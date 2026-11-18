@@ -8,15 +8,23 @@ import JoyStack from "@mui/joy/Stack";
 import { CssVarsProvider } from "@mui/joy/styles";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Divider from "../../components/divider";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveNewDishes } from "./selector";
+import { Product } from "../../../lib/types/product";
+import { serverApi } from "../../../lib/config";
+import { ProductCollection } from "../../../lib/enums/product.enum";
 
-const newDishes = [
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
-    { productName: "Kebab", imagePath: "/img/kebab.webp" },
-    { productName: "Lavash", imagePath: "/img/lavash.webp" },
-];
+/** REDUX SLICE & SELECTOR **/
+const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
+    newDishes,
+}));
 
 export default function NewDishes() {
+    const newDishes = useSelector(retrieveNewDishes);
+
+    console.log("newDishes", newDishes);
+
     return (
         <div className={"new-products-frame"}>
             <Container>
@@ -25,20 +33,26 @@ export default function NewDishes() {
                     <Stack className={"cards-frame"}>
                         <CssVarsProvider>
                             {newDishes.length !== 0 ? (
-                                newDishes.map((ele, index) => {
+                                newDishes.map((product: Product) => {
+                                    const imagePath = `${serverApi}/${product.productImages[0]}`;
+                                    const sizeVolume =
+                                        product.productCollection ===
+                                        ProductCollection.DRINK
+                                            ? product.productVolume + "l"
+                                            : product.productSize + " size";
                                     return (
                                         <Card
-                                            key={index}
+                                            key={product._id}
                                             variant="outlined"
                                             className={"card"}
                                         >
                                             <CardOverflow>
                                                 <div className="product-sale">
-                                                    Normal size
+                                                    {sizeVolume}
                                                 </div>
                                                 <AspectRatio ratio="1">
                                                     <img
-                                                        src={ele.imagePath}
+                                                        src={imagePath}
                                                         alt=""
                                                     />
                                                 </AspectRatio>
@@ -53,7 +67,9 @@ export default function NewDishes() {
                                                         <Typography
                                                             className={"title"}
                                                         >
-                                                            {ele.productName}
+                                                            {
+                                                                product.productName
+                                                            }
                                                         </Typography>
                                                         <Divider
                                                             width="2"
@@ -63,14 +79,19 @@ export default function NewDishes() {
                                                         <Typography
                                                             className={"price"}
                                                         >
-                                                            $12
+                                                            $
+                                                            {
+                                                                product.productPrice
+                                                            }
                                                         </Typography>
                                                     </JoyStack>
                                                     <JoyStack>
                                                         <Typography
                                                             className={"views"}
                                                         >
-                                                            20
+                                                            {
+                                                                product.productViews
+                                                            }
                                                             <VisibilityIcon
                                                                 style={{
                                                                     fontSize: 20,

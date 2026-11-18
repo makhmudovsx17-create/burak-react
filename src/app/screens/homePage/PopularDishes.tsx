@@ -33,14 +33,17 @@ export default function PopularDishes() {
                     <Stack className="cards-frame">
                         <CssVarsProvider>
                             {popularDishes.length !== 0 ? (
-                                popularDishes.map((ele: Product) => {
-                                    const imagePath = `${serverApi}/${ele.productImages[0]}`;
+                                popularDishes.map((product: Product) => {
+                                    const imagePath = `${serverApi}/${product.productImages[0]}`;
                                     return (
-                                        <Card className="card" key={ele._id}>
+                                        <Card
+                                            className="card"
+                                            key={product._id}
+                                        >
                                             <CardCover>
                                                 <img
                                                     src={imagePath}
-                                                    alt={ele.productName}
+                                                    alt={product.productName}
                                                 />
                                             </CardCover>
                                             <CardCover className="card-cover" />
@@ -60,7 +63,7 @@ export default function PopularDishes() {
                                                         textColor="#fff"
                                                         mb={1}
                                                     >
-                                                        {ele.productName}
+                                                        {product.productName}
                                                     </Typography>
                                                     <Typography
                                                         sx={{
@@ -71,7 +74,7 @@ export default function PopularDishes() {
                                                             display: "flex",
                                                         }}
                                                     >
-                                                        {ele.productViews}
+                                                        {product.productViews}
                                                         <VisibilityIcon
                                                             style={{
                                                                 fontSize: 25,
@@ -98,7 +101,7 @@ export default function PopularDishes() {
                                                     }
                                                     textColor="neutral.300"
                                                 >
-                                                    {ele.productDesc}
+                                                    {product.productDesc}
                                                 </Typography>
                                             </CardOverflow>
                                         </Card>
