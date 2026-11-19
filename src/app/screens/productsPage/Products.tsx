@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Button, Container, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,13 +9,15 @@ import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setProducts } from "./slice";
 import { createSelector } from "reselect";
 import { retrieveProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
+import ProductService from "../../services/ProductService";
+import { ProductCollection } from "../../../lib/enums/product.enum";
+import { serverApi } from "../../../lib/config";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -25,25 +27,22 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
     products,
 }));
 
-const products = [
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-    { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-];
-
 export default function Products() {
-    const history = useHistory();
+    const { setProducts } = actionDispatch(useDispatch());
+    const { products } = useSelector(productsRetriever);
 
-    /** HANDLERS **/
-    const chosenProductHandler = (id: number) => {
-        history.push(`/products/${id}`);
-    };
+    useEffect(() => {
+        const product = new ProductService();
+        product
+            .getProducts({
+                page: 1,
+                limit: 8,
+                order: "createdAt",
+                productCollection: ProductCollection.DISH,
+            })
+            .then((data) => setProducts(data))
+            .catch((err) => console.log(err));
+    }, []);
 
     return (
         <div className={"products"}>
@@ -131,23 +130,26 @@ export default function Products() {
 
                         <Stack className={"product-wrapper"}>
                             {products.length !== 0 ? (
-                                products.map((product, index) => {
+                                products.map((product: Product) => {
+                                    const imagePath = `${serverApi}/${product.productImages[0]}`;
+                                    const sizeVolume =
+                                        product.productCollection ===
+                                        ProductCollection.DRINK
+                                            ? product.productVolume + " litre"
+                                            : product.productSize + " size";
                                     return (
                                         <Stack
-                                            key={index}
+                                            key={product._id}
                                             className={"product-card"}
-                                            onClick={() =>
-                                                chosenProductHandler(index)
-                                            }
                                         >
                                             <Stack
                                                 className={"product-img"}
                                                 sx={{
-                                                    backgroundImage: `url(${product.imagePath})`,
+                                                    backgroundImage: `url(${imagePath})`,
                                                 }}
                                             >
                                                 <div className={"product-sale"}>
-                                                    Normal size
+                                                    {sizeVolume}
                                                 </div>
                                                 <Button
                                                     className={"shop-btn"}
@@ -173,12 +175,18 @@ export default function Products() {
                                                     }}
                                                 >
                                                     <Badge
-                                                        badgeContent={20}
+                                                        badgeContent={
+                                                            product.productViews
+                                                        }
                                                         color="secondary"
                                                     >
                                                         <RemoveRedEyeIcon
                                                             sx={{
-                                                                color: "gray",
+                                                                color:
+                                                                    product.productViews ===
+                                                                    0
+                                                                        ? "gray"
+                                                                        : "white",
                                                             }}
                                                         />
                                                     </Badge>
@@ -192,7 +200,7 @@ export default function Products() {
                                                 </span>
                                                 <div className={"product-desc"}>
                                                     <MonetizationOnIcon />
-                                                    {12}
+                                                    {product.productPrice}
                                                 </div>
                                             </Box>
                                         </Stack>
