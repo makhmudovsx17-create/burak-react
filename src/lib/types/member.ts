@@ -15,7 +15,7 @@ export interface Member {
     updatedAt: Date;
 }
 
-export interface memberInput {
+export interface MemberInput {
     memberType?: MemberType;
     memberStatus?: MemberStatus;
     memberNick: string;
@@ -32,7 +32,7 @@ export interface LoginInput {
     memberPassword: string;
 }
 
-export interface memberUpdateInput {
+export interface MemberUpdateInput {
     memberNick?: string;
     memberPhone?: string;
     memberPassword?: string;

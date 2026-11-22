@@ -20,12 +20,12 @@ function App() {
     const location = useLocation();
 
     const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
-    const [signUpOpen, setSignUpOpen] = useState<boolean>(false);
+    const [signupOpen, setSignupOpen] = useState<boolean>(false);
     const [loginOpen, setLoginOpen] = useState<boolean>(false);
 
     /** HANDLERS **/
 
-    const handleSignupClose = () => setSignUpOpen(false);
+    const handleSignupClose = () => setSignupOpen(false);
     const handleLoginClose = () => setLoginOpen(false);
 
     return (
@@ -37,6 +37,8 @@ function App() {
                     onRemove={onRemove}
                     onDelete={onDelete}
                     onDeleteAll={onDeleteAll}
+                    setSignupOpen={setSignupOpen}
+                    setLoginOpen={setLoginOpen}
                 />
             ) : (
                 <OtherNavbar
@@ -45,6 +47,8 @@ function App() {
                     onRemove={onRemove}
                     onDelete={onDelete}
                     onDeleteAll={onDeleteAll}
+                    setSignupOpen={setSignupOpen}
+                    setLoginOpen={setLoginOpen}
                 />
             )}
             <Switch>
@@ -67,10 +71,10 @@ function App() {
             <Footer />
 
             <AuthenticationModal
-                signupOpen={signUpOpen}
+                signupOpen={signupOpen}
                 loginOpen={loginOpen}
                 handleLoginClose={handleLoginClose}
-                handleSignupClose={handleLoginClose}
+                handleSignupClose={handleSignupClose}
             />
         </>
     );
