@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { OrdersPageState } from "../../../lib/types/screen";
 
 const initialState: OrdersPageState = {
-    pausedOrder: [],
-    processOrder: [],
-    finishedOrder: [],
+    pausedOrders: [],
+    processOrders: [],
+    finishedOrders: [],
 };
 
 const ordersPageSlice = createSlice({
@@ -12,13 +12,13 @@ const ordersPageSlice = createSlice({
     initialState,
     reducers: {
         setPausedOrder: (state, action) => {
-            state.pausedOrder = action.payload;
+            state.pausedOrders = action.payload;
         },
         setProcessOrder: (state, action) => {
-            state.processOrder = action.payload;
+            state.processOrders = action.payload;
         },
         setFinishedOrder: (state, action) => {
-            state.finishedOrder = action.payload;
+            state.finishedOrders = action.payload;
         },
     },
 });

@@ -25,7 +25,7 @@ export interface ProductsPageState {
 
 /**  ORDERS PAGE **/
 export interface OrdersPageState {
-    pausedOrder: Order[];
-    processOrder: Order[];
-    finishedOrder: Order[];
+    pausedOrders: Order[];
+    processOrders: Order[];
+    finishedOrders: Order[];
 }

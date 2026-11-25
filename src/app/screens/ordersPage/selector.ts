@@ -3,17 +3,17 @@ import { AppRootState } from "../../../lib/types/screen";
 
 const selectOrdersPage = (state: AppRootState) => state.ordersPage;
 
-export const retrievePausedOrder = createSelector(
+export const retrievePausedOrders = createSelector(
     selectOrdersPage,
-    (OrdersPage) => OrdersPage.pausedOrder,
+    (OrdersPage) => OrdersPage.pausedOrders,
 );
 
-export const retrieveProcessOrder = createSelector(
+export const retrieveProcessOrders = createSelector(
     selectOrdersPage,
-    (OrdersPage) => OrdersPage.processOrder,
+    (OrdersPage) => OrdersPage.processOrders,
 );
 
-export const retrieveFinishedOrder = createSelector(
+export const retrieveFinishedOrders = createSelector(
     selectOrdersPage,
-    (OrdersPage) => OrdersPage.finishedOrder,
+    (OrdersPage) => OrdersPage.finishedOrders,
 );

@@ -13,7 +13,7 @@ export interface OrderItem {
     itemQuantity: number;
     itemPrice: number;
     orderId: string;
-    productid: string;
+    productId: string;
     createdAt: Date;
     updatedAt: Date;
 }
