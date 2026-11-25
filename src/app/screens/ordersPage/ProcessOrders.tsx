@@ -3,36 +3,56 @@ import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import TabPanel from "@mui/lab/TabPanel";
 import moment from "moment";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePausedOrders } from "./selector";
+import { serverApi } from "../../../lib/config";
+import { Order, OrderItem } from "../../../lib/types/order";
+import { Product } from "../../../lib/types/product";
+
+/** REDUX SLICE & SELECTOR **/
+const processOrdersRetriever = createSelector(
+    retrievePausedOrders,
+    (processOrders) => ({ processOrders }),
+);
 
 export default function ProcessOrders() {
+    const { processOrders } = useSelector(processOrdersRetriever);
+
     return (
         <TabPanel value={"2"}>
             <Stack>
-                {[1, 2].map((ele, index) => {
+                {processOrders?.map((order: Order) => {
                     return (
-                        <Box key={index} className={"order-main-box"}>
+                        <Box key={order._id} className={"order-main-box"}>
                             <Box className={"order-box-scroll"}>
-                                {[1, 2].map((ele2, index2) => {
+                                {order?.orderItems?.map((item: OrderItem) => {
+                                    const product: Product =
+                                        order.productData.filter(
+                                            (ele: Product) =>
+                                                item.productId === ele._id,
+                                        )[0];
+                                    const imagePath = `${serverApi}/${product.productImages[0]}`;
                                     return (
                                         <Box
-                                            key={index2}
+                                            key={item._id}
                                             className={"orders-name-price"}
                                         >
                                             <img
-                                                src={"/img/kebab.webp"}
+                                                src={imagePath}
                                                 className={"order-dish-img"}
                                                 alt={"Kebab"}
                                             />
                                             <p className={"title-dish"}>
-                                                Kebab
+                                                {product.productName}
                                             </p>
                                             <Box className={"price-box"}>
-                                                <p>$11</p>
+                                                <p>${item.itemPrice}</p>
                                                 <img
                                                     src={"/icons/close.svg"}
                                                     alt={"multiply"}
                                                 />
-                                                <p>2</p>
+                                                <p>{item.itemQuantity}</p>
                                                 <img
                                                     src={"/icons/pause.svg"}
                                                     alt={"equals"}
@@ -42,7 +62,9 @@ export default function ProcessOrders() {
                                                         marginLeft: "15px",
                                                     }}
                                                 >
-                                                    $22
+                                                    $
+                                                    {item.itemQuantity *
+                                                        item.itemPrice}
                                                 </p>
                                             </Box>
                                         </Box>
@@ -53,21 +75,24 @@ export default function ProcessOrders() {
                             <Box className={"total-price-box"}>
                                 <Box className={"box-total"}>
                                     <p>Product price</p>
-                                    <p>$22</p>
+                                    <p>
+                                        $
+                                        {order.orderTotal - order.orderDelivery}
+                                    </p>
                                     <img
                                         src={"/icons/plus.svg"}
                                         style={{ marginLeft: "20px" }}
                                         alt={"plus"}
                                     />
                                     <p>delivery cost</p>
-                                    <p>$2</p>
+                                    <p>${order.orderDelivery}</p>
                                     <img
                                         src={"/icons/pause.svg"}
                                         style={{ marginLeft: "20px" }}
                                         alt={"equals"}
                                     />
                                     <p>Total</p>
-                                    <p>$24</p>
+                                    <p>${order.orderTotal}</p>
                                 </Box>
                                 <p className={"data-compl"}>
                                     {moment().format("YY-MM-DD HH:mm")}
@@ -83,21 +108,22 @@ export default function ProcessOrders() {
                     );
                 })}
 
-                {false && (
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <img
-                            src={"/icons/noimage-list.svg"}
-                            style={{ width: 300, height: 300 }}
-                            alt={"no orders"}
-                        />
-                    </Box>
-                )}
+                {!processOrders ||
+                    (processOrders.length === 0 && (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <img
+                                src={"/icons/noimage-list.svg"}
+                                style={{ width: 300, height: 300 }}
+                                alt={"no orders"}
+                            />
+                        </Box>
+                    ))}
             </Stack>
         </TabPanel>
     );
